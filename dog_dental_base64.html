@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Dental Care Products - IDLS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Custom styles matching template */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            .desktop-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-indigo-600">IDLS</a>
+                    <div class="hidden md:block ml-10">
+                        <div class="flex items-baseline space-x-4">
+                            <a href="index.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Home</a>
+                            <div class="nav-item relative">
+                                <a href="#" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium flex items-center">
+                                    Dog Food <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="nav-dropdown">
+                                    <a href="dog_food.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">All Dog Food</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Dry Food</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Wet Food</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Puppy Food</a>
+                                </div>
+                            </div>
+                            <div class="nav-item relative">
+                                <a href="#" class="text-indigo-600 px-3 py-2 text-sm font-medium flex items-center">
+                                    Dog Health <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="nav-dropdown">
+                                    <a href="dog_health.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">All Health</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Vitamins</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Supplements</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Medications</a>
+                                </div>
+                            </div>
+                            <div class="nav-item relative">
+                                <a href="#" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium flex items-center">
+                                    Dog Grooming <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="nav-dropdown">
+                                    <a href="dog_grooming_updated.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">All Grooming</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Brushes</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Clippers</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Shampoos</a>
+                                </div>
+                            </div>
+                            <div class="nav-item relative">
+                                <a href="#" class="text-indigo-600 font-medium px-3 py-2 text-sm font-medium flex items-center">
+                                    Dog Dental <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="nav-dropdown">
+                                    <a href="dog_dental_updated.html" class="block px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded font-medium">All Dental</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Toothpaste</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Dental Chews</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Water Additives</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Brushes & Wipes</a>
+                                </div>
+                            </div>
+                            <div class="nav-item relative">
+                                <a href="#" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium flex items-center">
+                                    Dog Toys <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="nav-dropdown">
+                                    <a href="dog_toys.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">All Toys</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Chew Toys</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Interactive</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded">Plush Toys</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-indigo-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600">Home</a>
+                <div class="border-t pt-2">
+                    <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Dog Food</p>
+                    <a href="dog_food.html" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">All Dog Food</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Dry Food</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Wet Food</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Puppy Food</a>
+                </div>
+                <div class="border-t pt-2">
+                    <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Dog Health</p>
+                    <a href="dog_health.html" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">All Health</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Vitamins</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Supplements</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Medications</a>
+                </div>
+                <div class="border-t pt-2">
+                    <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Dog Grooming</p>
+                    <a href="dog_grooming_updated.html" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">All Grooming</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Brushes</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Clippers</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Shampoos</a>
+                </div>
+                <div class="border-t pt-2">
+                    <p class="px-3 py-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider">Dog Dental</p>
+                    <a href="dog_dental_updated.html" class="block px-6 py-2 text-sm text-indigo-600 font-medium">All Dental</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Toothpaste</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Dental Chews</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Water Additives</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Brushes & Wipes</a>
+                </div>
+                <div class="border-t pt-2">
+                    <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Dog Toys</p>
+                    <a href="dog_toys.html" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">All Toys</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Chew Toys</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Interactive</a>
+                    <a href="#" class="block px-6 py-2 text-sm text-gray-700 hover:text-indigo-600">Plush Toys</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Dog Dental Care Products</h1>
+            <p class="text-xl opacity-90 mb-8">Keep your dog's teeth clean and healthy with our recommended dental care products</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#toothpaste" class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-tooth mr-2"></i>Toothpaste
+                </a>
+                <a href="#chews" class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-bone mr-2"></i>Dental Chews
+                </a>
+                <a href="#water-additives" class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-tint mr-2"></i>Water Additives
+                </a>
+                <a href="#brushes-wipes" class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-brush mr-2"></i>Brushes & Wipes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="py-8 bg-white shadow-sm sticky top-16 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="category-btn active px-6 py-2 rounded-full border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white transition" data-category="all">
+                    All Products
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border-2 border-gray-300 text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition" data-category="toothpaste">
+                    Toothpaste
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border-2 border-gray-300 text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition" data-category="chews">
+                    Dental Chews
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border-2 border-gray-300 text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition" data-category="water">
+                    Water Additives
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border-2 border-gray-300 text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition" data-category="brushes">
+                    Brushes & Wipes
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Grid -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="products-grid">
+                <!-- Product 1: Minties VetIQ Dog Dental Chews -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="chews">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/Minties%20VetIQ%20Dog%20Dental%20Chews%2040%20Count%20Small%20Dogs.jpg" alt="Minties VetIQ Dog Dental Chews" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Minties VetIQ Dog Dental Chews (40 Count, Small Dogs)</h3>
+                        <p class="text-gray-600 mb-4">Vet-recommended dental treat chews for dogs 5-24 lbs. Mint-flavored bones help clean teeth, remove plaque/tartar, and freshen breath with five natural breath-fresheners.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$8-$13</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.6/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=Minties+VetIQ+Dog+Dental+Chews+40+Count+Small+Dogs&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 2: Greenies Original Dental Dog Treats -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="chews">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/Greenies%20Original%20Dental%20Dog%20Treats%20Teenie%20260%20Treat%20Bulk%20Pack.jpg" alt="Greenies Original Dental Dog Treats" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Greenies Original Dental Dog Treats – Teenie (260 Treat Bulk Pack)</h3>
+                        <p class="text-gray-600 mb-4">Value pack of Greenies Original Teenie dental chews (4 packs of 65, total 260 treats) designed for small dogs (5-15 lbs). VOHC-accepted chewy dental treats that help fight plaque and tartar.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$40-$50</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.7/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=Greenies+Original+Teenie+Dental+Dog+Treats+260+Count+Bulk+Pack&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 3: Oxyfresh Premium Pet Dental Care Solution -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="water">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/Oxyfresh%20Premium%20Pet%20Dental%20Care%20Solution%20Water%20Additive%2016%20oz.jpg" alt="Oxyfresh Premium Pet Dental Care Solution" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Oxyfresh Premium Pet Dental Care Solution (Water Additive, 16 oz)</h3>
+                        <p class="text-gray-600 mb-4">Dental water additive for dogs and cats. Vet-recommended solution eliminates bad breath and fights plaque & tartar with no brushing required. Flavorless/odorless for easy daily use.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$16-$20</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.6/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=Oxyfresh+Premium+Pet+Dental+Care+Solution+Water+Additive+16+oz&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 4: Virbac C.E.T. Enzymatic Dog Toothpaste -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="toothpaste">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/Virbac%20CET%20Enzymatic%20Dog%20Toothpaste%20Poultry%20Flavor%202.5%20oz.jpg" alt="Virbac C.E.T. Enzymatic Dog Toothpaste" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Virbac C.E.T. Enzymatic Dog Toothpaste (Poultry Flavor, 2.5 oz)</h3>
+                        <p class="text-gray-600 mb-4">Popular enzymatic toothpaste formulated for dogs that breaks down plaque and tartar. Poultry flavor makes it palatable, meant for use with pet toothbrush for routine brushing.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">~$10</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.7/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=Virbac+CET+Enzymatic+Dog+Toothpaste+Poultry+Flavor&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 5: HICC PET Disposable Dog & Cat Teeth Cleaning Wipes -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="brushes">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/HICC%20PET%20Disposable%20Dog%20Cat%20Teeth%20Cleaning%20Wipes.jpg" alt="HICC PET Teeth Cleaning Wipes" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">HICC PET Disposable Dog & Cat Teeth Cleaning Wipes</h3>
+                        <p class="text-gray-600 mb-4">Finger toothbrush wipes with mint scent for dogs and cats. Soft wipes wrap around finger to wipe away plaque, tartar, and bad breath. Alcohol-free with coconut oil-based formula.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$15-$16</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.6/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=HICC+PET+Disposable+Dog+Cat+Teeth+Cleaning+Wipes&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 6: PetLab Co. ProBright Dental Powder -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="water">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/PetLab%20Co%20ProBright%20Dental%20Powder%20Oral%20Care%20Supplement.jpg" alt="PetLab Co. ProBright Dental Powder" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">PetLab Co. ProBright Dental Powder (Oral Care Supplement)</h3>
+                        <p class="text-gray-600 mb-4">Brush-free dental powder supplement for small dogs. Added to food daily to reduce plaque and tartar and freshen breath, using probiotics and enzymes. Easy alternative to toothpaste.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$30-$35</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.4/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=PetLab+Co+ProBright+Dental+Powder+Small+Dogs&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 7: Arm & Hammer Fresh Breath Enzymatic Dental Kit -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="toothpaste">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/Arm%20Hammer%20Fresh%20Breath%20Enzymatic%20Dental%20Kit.jpg" alt="Arm & Hammer Fresh Breath Enzymatic Dental Kit" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Arm & Hammer Fresh Breath Enzymatic Dental Kit</h3>
+                        <p class="text-gray-600 mb-4">Complete dog dental care kit including enzymatic toothpaste (2.5 oz, baking-soda infused, chicken flavored) plus dual-headed toothbrush and finger brush. Vet-recommended.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$8-$11</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">3.9/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=Arm+Hammer+Fresh+Breath+Enzymatic+Dental+Kit+Dog&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 8: TropiClean Fresh Breath Water Additive -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="water">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Dental/TropiClean%20Fresh%20Breath%20Water%20Additive%20for%20Dogs.jpg" alt="TropiClean Fresh Breath Water Additive" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">TropiClean Fresh Breath Water Additive for Dogs</h3>
+                        <p class="text-gray-600 mb-4">No-brush dental water additive that fights bacteria, reduces plaque and tartar, and freshens breath as the dog drinks. Easy oral care routine with zero hassle.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">$14-$18</span>
+                            <div class="flex items-center">
+                                <div class="text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">4.5/5</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.com/s?k=TropiClean+Fresh+Breath+Water+Additive+Dogs&tag=idls-20" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                            <i class="fab fa-amazon mr-2"></i>View on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">IDLS</h3>
+                    <p class="text-gray-400">Your trusted source for the best dog products and care recommendations.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="dog_food.html" class="text-gray-400 hover:text-white">Dog Food</a></li>
+                        <li><a href="dog_health.html" class="text-gray-400 hover:text-white">Dog Health</a></li>
+                        <li><a href="dog_grooming_updated.html" class="text-gray-400 hover:text-white">Dog Grooming</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Toothpaste</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dental Chews</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Water Additives</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Brushes & Wipes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 IDLS. All rights reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Service</a> | <a href="#" class="hover:text-white">Disclaimer</a></p>
+                <p class="text-gray-500 text-sm mt-2">As an Amazon Associate, we earn from qualifying purchases.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Category filter functionality
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                categoryButtons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                    btn.classList.add('border-gray-300', 'text-gray-700');
+                });
+                button.classList.add('active', 'bg-indigo-600', 'text-white');
+                button.classList.remove('border-gray-300', 'text-gray-700');
+
+                // Filter products
+                const category = button.dataset.category;
+                productCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

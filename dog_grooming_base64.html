@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Dog Lovers Society - Dog Grooming Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://js.stripe.com/v3/buy-button.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .scarcity-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #ff6b6b; }
+            to { box-shadow: 0 0 20px #ff6b6b, 0 0 30px #ff6b6b; }
+        }
+        .amazon-btn {
+            background: linear-gradient(45deg, #ff9500, #ff7300);
+            transition: all 0.3s ease;
+        }
+        .amazon-btn:hover {
+            background: linear-gradient(45deg, #ff7300, #ff5500);
+            transform: scale(1.05);
+        }
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 8px;
+            padding: 8px 0;
+            width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 16px;
+            color: #374151;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+        .mobile-dropdown {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+        }
+        .mobile-dropdown.open {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .grooming-badge {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+        }
+        .professional-badge {
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9);
+        }
+        .tool-badge {
+            background: linear-gradient(45deg, #059669, #047857);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Desktop Header -->
+    <header class="desktop-nav bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-blue-600 text-white px-3 py-1 rounded flex items-center">
+                        <i class="fas fa-heart mr-2"></i>
+                        <span class="font-bold">IDLS</span>
+                    </div>
+                    <span class="text-gray-600 text-sm hidden lg:block">International Dog Lovers Society</span>
+                </div>
+                <nav class="flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 font-medium transition-colors" onclick="showSection('home')">Home</a>
+                    <div class="dropdown" id="desktop-dropdown">
+                        <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors flex items-center" onclick="toggleDropdown('desktop-dropdown')">
+                            Dog Products <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#dog-food" onclick="showSection('dog-food'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Food</a>
+                            <a href="#dog-house" onclick="showSection('dog-house'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog House</a>
+                            <a href="#dog-leash" onclick="showSection('dog-leash'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Leash</a>
+                            <a href="#dog-health" onclick="showSection('dog-health'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Health</a>
+                            <a href="#dog-grooming" onclick="showSection('dog-grooming'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Grooming</a>
+                            <a href="#dog-dental" onclick="showSection('dog-dental'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Dental</a>
+                            <a href="#dog-toys" onclick="showSection('dog-toys'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Toys</a>
+                            <a href="#dog-costumes" onclick="showSection('dog-costumes'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Costumes</a>
+                        </div>
+                    </div>
+
+                    <a href="#diy-treats" class="text-gray-700 hover:text-blue-600 font-medium transition-colors" onclick="showSection('diy-treats')">DIY Treats</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Header -->
+    <header class="mobile-nav bg-white shadow-lg sticky top-0 z-50">
+        <div class="flex items-center justify-between h-16 px-4">
+            <div class="bg-blue-600 text-white px-3 py-1 rounded flex items-center">
+                <i class="fas fa-heart mr-2"></i>
+                <span class="font-bold">IDLS</span>
+            </div>
+            <button onclick="toggleMobileMenu()" class="text-gray-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-50">
+            <div class="flex items-center justify-between h-16 px-4 border-b">
+                <div class="bg-blue-600 text-white px-3 py-1 rounded flex items-center">
+                    <i class="fas fa-heart mr-2"></i>
+                    <span class="font-bold">IDLS</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="space-y-4">
+                    <a href="#home" class="block text-gray-700 font-medium py-2" onclick="showSection('home'); toggleMobileMenu()">Home</a>
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Dog Products</h3>
+                        <div class="space-y-2">
+                            <a href="#dog-food" class="block text-gray-600 py-1" onclick="showSection('dog-food'); toggleMobileMenu()">Dog Food</a>
+                            <a href="#dog-house" class="block text-gray-600 py-1" onclick="showSection('dog-house'); toggleMobileMenu()">Dog House</a>
+                            <a href="#dog-leash" class="block text-gray-600 py-1" onclick="showSection('dog-leash'); toggleMobileMenu()">Dog Leash</a>
+                            <a href="#dog-health" class="block text-gray-600 py-1" onclick="showSection('dog-health'); toggleMobileMenu()">Dog Health</a>
+                            <a href="#dog-grooming" class="block text-gray-600 py-1" onclick="showSection('dog-grooming'); toggleMobileMenu()">Dog Grooming</a>
+                            <a href="#dog-dental" class="block text-gray-600 py-1" onclick="showSection('dog-dental'); toggleMobileMenu()">Dog Dental</a>
+                            <a href="#dog-toys" class="block text-gray-600 py-1" onclick="showSection('dog-toys'); toggleMobileMenu()">Dog Toys</a>
+                            <a href="#dog-costumes" class="block text-gray-600 py-1" onclick="showSection('dog-costumes'); toggleMobileMenu()">Dog Costumes</a>
+                        </div>
+                    </div>
+                    <a href="#diy-treats" class="block text-gray-700 font-medium py-2" onclick="showSection('diy-treats'); toggleMobileMenu()">DIY Treats</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Home Section -->
+        <div id="home" class="content-section">
+            <!-- Hero Section -->
+            <div class="gradient-bg text-white py-20 rounded-2xl mb-12">
+                <div class="max-w-4xl mx-auto text-center px-4">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6">Welcome to IDLS</h1>
+                    <p class="text-xl md:text-2xl mb-8">International Dog Lovers Society - Premium Pet Products</p>
+                    <p class="text-lg mb-8">Your trusted source for the finest dog products, carefully curated for your beloved companion's health, happiness, and wellbeing.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#dog-food" onclick="showSection('dog-food')" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                            Shop Dog Food
+                        </a>
+                        <a href="#dog-grooming" onclick="showSection('dog-grooming')" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-blue-600 transition">
+                            Grooming Tools
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Categories -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-center mb-12">Featured Categories</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-food')">
+                        <i class="fas fa-bone text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Premium Dog Food</h3>
+                        <p class="text-gray-600">Nutritious meals for every life stage</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-health')">
+                        <i class="fas fa-heartbeat text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Health & Wellness</h3>
+                        <p class="text-gray-600">Supplements and health products</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-grooming')">
+                        <i class="fas fa-cut text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Grooming Essentials</h3>
+                        <p class="text-gray-600">Keep your pup looking their best</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-toys')">
+                        <i class="fas fa-gamepad text-4xl text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Fun & Toys</h3>
+                        <p class="text-gray-600">Entertainment and enrichment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="bg-blue-50 rounded-2xl p-8 mb-16">
+                <h2 class="text-4xl font-bold text-center mb-12">Why Choose IDLS?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-certificate text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Quality Guaranteed</h3>
+                        <p class="text-gray-600">Every product is tested and approved by our team of pet experts</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-shipping-fast text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Fast Shipping</h3>
+                        <p class="text-gray-600">Quick delivery to your doorstep with tracking</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-user-shield text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Secure Shopping</h3>
+                        <p class="text-gray-600">Safe and secure checkout process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dog Grooming Section -->
+        <div id="dog-grooming" class="content-section hidden">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-5xl font-bold text-center mb-8">Dog Grooming Tools</h1>
+                <p class="text-xl text-gray-600 text-center mb-12">Keep your dog looking and feeling their best with professional grooming tools.</p>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button onclick="filterGrooming('all')" class="filter-btn active bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">All Tools</button>
+                    <button onclick="filterGrooming('brushes')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Brushes</button>
+                    <button onclick="filterGrooming('clippers')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Clippers</button>
+                    <button onclick="filterGrooming('shampoos')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Shampoos</button>
+                    <button onclick="filterGrooming('accessories')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Accessories</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Dipoo Self-Cleaning Slicker Brush -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="brushes">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-brush text-6xl text-blue-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 grooming-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Best Seller
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Dipoo Self-Cleaning Slicker Brush</h3>
+                            <p class="text-gray-600 mb-4">Self-cleaning brush that gently removes loose fur, tangles, and dirt with retractable mechanism</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$8-10</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.6)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Dipoo+Self-Cleaning+Slicker+Brush&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PAWFUME Deshedding Dog Shampoo -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="shampoos">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-soap text-6xl text-green-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 grooming-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                2-in-1 Formula
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">PAWFUME Deshedding Dog Shampoo & Conditioner</h3>
+                            <p class="text-gray-600 mb-4">Premium 2-in-1 deshedding formula with botanicals to reduce shedding and nourish coat</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$12-16</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.5)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=PAWFUME+Deshedding+Dog+Shampoo+%26+Conditioner+%28Show+Dog+Scent%29&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- oneisall Low-Noise Dog Grooming Clippers Kit -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="clippers">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-cut text-6xl text-purple-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 professional-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Low Noise
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">oneisall Low-Noise Dog Grooming Clippers Kit</h3>
+                            <p class="text-gray-600 mb-4">Cordless rechargeable clipper with minimal noise, perfect for anxious pets</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$30-40</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.5)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=oneisall+Low-Noise+Dog+Grooming+Clippers+Kit&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hansprou High-Power 12V Professional Dog Clipper -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="clippers">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-plug text-6xl text-red-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 professional-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Professional
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Hansprou High-Power 12V Professional Dog Clipper</h3>
+                            <p class="text-gray-600 mb-4">Heavy-duty corded clipper with detachable blade design for thick coats</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$30-45</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.7)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Hansprou+High-Power+12V+Professional+Dog+Clipper+%28Detachable+Blade%29&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Andis UltraEdge 2-Speed Detachable Blade Clipper -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="clippers">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-cog text-6xl text-gray-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 professional-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                2-Speed
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Andis UltraEdge 2-Speed Detachable Blade Clipper</h3>
+                            <p class="text-gray-600 mb-4">Professional-quality clipper with cool-running motor for all coat types</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$120-150</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.3)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Andis+UltraEdge+2-Speed+Detachable+Blade+Clipper+%28Model+AGC2%29&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3-Pack Silicone Dog Bath & Grooming Brushes -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="brushes">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-hand-sparkles text-6xl text-pink-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 grooming-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                3-Pack
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">3-Pack Silicone Dog Bath & Grooming Brushes</h3>
+                            <p class="text-gray-600 mb-4">Flexible silicone brushes for bath time massage and gentle grooming</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">Under $10</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.5)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=3-Pack+Silicone+Dog+Bath+%26+Grooming+Brushes&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LED Light Pet Nail Clipper -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="accessories">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-lightbulb text-6xl text-yellow-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 tool-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Safety Light
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">LED Light Pet Nail Clipper</h3>
+                            <p class="text-gray-600 mb-4">Nail trimmer with LED light to illuminate the quick for safer trimming</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$10-15</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.4)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=LED+Light+Pet+Nail+Clipper+%28with+Safety+Quick+Sensor%29&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LEYOUFU Cordless Dog Paw Trimmer -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="clippers">
+                        <div class="relative">
+                            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-battery-full text-6xl text-green-400"></i>
+                            </div>
+                            <div class="absolute top-4 left-4 tool-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Cordless
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">LEYOUFU Cordless Dog Paw Trimmer</h3>
+                            <p class="text-gray-600 mb-4">Mini trimmer for sensitive areas like paws, face, and ears</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$9-15</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.1)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=LEYOUFU+Cordless+Dog+Paw+Trimmer+%28Mini+Grooming+Clipper%29&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('active');
+        }
+
+        function closeDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.remove('active');
+        }
+
+        function filterGrooming(category) {
+            const cards = document.querySelectorAll('#dog-grooming .product-card');
+            const buttons = document.querySelectorAll('#dog-grooming .filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active', 'bg-blue-600', 'text-white'));
+            buttons.forEach(btn => btn.classList.add('bg-gray-200', 'text-gray-700'));
+
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('active', 'bg-blue-600', 'text-white');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
