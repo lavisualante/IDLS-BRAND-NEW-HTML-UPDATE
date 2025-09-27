@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Costumes | IDLS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://js.stripe.com/v3/buy-button.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .scarcity-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #ff6b6b; }
+            to { box-shadow: 0 0 20px #ff6b6b, 0 0 30px #ff6b6b; }
+        }
+        .amazon-btn {
+            background: linear-gradient(45deg, #ff9500, #ff7300);
+            transition: all 0.3s ease;
+        }
+        .amazon-btn:hover {
+            background: linear-gradient(45deg, #ff7300, #ff5500);
+            transform: scale(1.05);
+        }
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 8px;
+            padding: 8px 0;
+            width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 16px;
+            color: #374151;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+        .mobile-dropdown {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+        }
+        .mobile-dropdown.open {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .costume-badge {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+        }
+        .formal-badge {
+            background: linear-gradient(45deg, #1e40af, #1e3a8a);
+        }
+        .halloween-badge {
+            background: linear-gradient(45deg, #dc2626, #991b1b);
+        }
+        .animal-badge {
+            background: linear-gradient(45deg, #16a34a, #15803d);
+        }
+        .superhero-badge {
+            background: linear-gradient(45deg, #7c3aed, #5b21b6);
+        }
+        .food-badge {
+            background: linear-gradient(45deg, #ea580c, #c2410c);
+        }
+        .movie-badge {
+            background: linear-gradient(45deg, #0891b2, #0e7490);
+        }
+        .holiday-badge {
+            background: linear-gradient(45deg, #db2777, #be185d);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Desktop Header -->
+    <header class="desktop-nav bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-blue-600 text-white px-3 py-1 rounded flex items-center">
+                        <i class="fas fa-heart mr-2"></i>
+                        <span class="font-bold">IDLS</span>
+                    </div>
+                    <span class="text-gray-600 text-sm hidden lg:block">International Dog Lovers Society</span>
+                </div>
+                <nav class="flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 font-medium transition-colors" onclick="showSection('home')">Home</a>
+                    <div class="dropdown" id="desktop-dropdown">
+                        <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors flex items-center" onclick="toggleDropdown('desktop-dropdown')">
+                            Dog Products <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#dog-food" onclick="showSection('dog-food'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Food</a>
+                            <a href="#dog-house" onclick="showSection('dog-house'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog House</a>
+                            <a href="#dog-leash" onclick="showSection('dog-leash'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Leash</a>
+                            <a href="#dog-health" onclick="showSection('dog-health'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Health</a>
+                            <a href="#dog-grooming" onclick="showSection('dog-grooming'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Grooming</a>
+                            <a href="#dog-dental" onclick="showSection('dog-dental'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Dental</a>
+                            <a href="#dog-toys" onclick="showSection('dog-toys'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Toys</a>
+                            <a href="#dog-costumes" onclick="showSection('dog-costumes'); closeDropdown('desktop-dropdown')" class="dropdown-item">Dog Costumes</a>
+                        </div>
+                    </div>
+
+                    <a href="#diy-treats" class="text-gray-700 hover:text-blue-600 font-medium transition-colors" onclick="showSection('diy-treats')">DIY Treats</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Header -->
+    <header class="mobile-nav bg-white shadow-lg sticky top-0 z-50">
+        <div class="flex items-center justify-between h-16 px-4">
+            <div class="bg-blue-600 text-white px-3 py-1 rounded flex items-center">
+                <i class="fas fa-heart mr-2"></i>
+                <span class="font-bold">IDLS</span>
+            </div>
+            <button onclick="toggleMobileMenu()" class="text-gray-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-50">
+            <div class="flex items-center justify-between h-16 px-4 border-b">
+                <div class="bg-blue-600 text-white px-3 py-1 rounded flex items-center">
+                    <i class="fas fa-heart mr-2"></i>
+                    <span class="font-bold">IDLS</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="space-y-4">
+                    <a href="#home" class="block text-gray-700 font-medium py-2" onclick="showSection('home'); toggleMobileMenu()">Home</a>
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Dog Products</h3>
+                        <div class="space-y-2">
+                            <a href="#dog-food" class="block text-gray-600 py-1" onclick="showSection('dog-food'); toggleMobileMenu()">Dog Food</a>
+                            <a href="#dog-house" class="block text-gray-600 py-1" onclick="showSection('dog-house'); toggleMobileMenu()">Dog House</a>
+                            <a href="#dog-leash" class="block text-gray-600 py-1" onclick="showSection('dog-leash'); toggleMobileMenu()">Dog Leash</a>
+                            <a href="#dog-health" class="block text-gray-600 py-1" onclick="showSection('dog-health'); toggleMobileMenu()">Dog Health</a>
+                            <a href="#dog-grooming" class="block text-gray-600 py-1" onclick="showSection('dog-grooming'); toggleMobileMenu()">Dog Grooming</a>
+                            <a href="#dog-dental" class="block text-gray-600 py-1" onclick="showSection('dog-dental'); toggleMobileMenu()">Dog Dental</a>
+                            <a href="#dog-toys" class="block text-gray-600 py-1" onclick="showSection('dog-toys'); toggleMobileMenu()">Dog Toys</a>
+                            <a href="#dog-costumes" class="block text-gray-600 py-1" onclick="showSection('dog-costumes'); toggleMobileMenu()">Dog Costumes</a>
+                        </div>
+                    </div>
+                    <a href="#diy-treats" class="block text-gray-700 font-medium py-2" onclick="showSection('diy-treats'); toggleMobileMenu()">DIY Treats</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Home Section -->
+        <div id="home" class="content-section">
+            <!-- Hero Section -->
+            <div class="gradient-bg text-white py-20 rounded-2xl mb-12">
+                <div class="max-w-4xl mx-auto text-center px-4">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6">Welcome to IDLS</h1>
+                    <p class="text-xl md:text-2xl mb-8">International Dog Lovers Society - Premium Pet Products</p>
+                    <p class="text-lg mb-8">Your trusted source for the finest dog products, carefully curated for your beloved companion's health, happiness, and wellbeing.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#dog-food" onclick="showSection('dog-food')" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                            Shop Dog Food
+                        </a>
+                        <a href="#dog-costumes" onclick="showSection('dog-costumes')" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-blue-600 transition">
+                            Fun Costumes
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Categories -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-center mb-12">Featured Categories</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-food')">
+                        <i class="fas fa-bone text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Premium Dog Food</h3>
+                        <p class="text-gray-600">Nutritious meals for every life stage</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-health')">
+                        <i class="fas fa-heartbeat text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Health & Wellness</h3>
+                        <p class="text-gray-600">Supplements and health products</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-costumes')">
+                        <i class="fas fa-mask text-4xl text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Fun Costumes</h3>
+                        <p class="text-gray-600">Dress up your pup for any occasion</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition cursor-pointer" onclick="showSection('dog-toys')">
+                        <i class="fas fa-gamepad text-4xl text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Fun & Toys</h3>
+                        <p class="text-gray-600">Entertainment and enrichment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="bg-blue-50 rounded-2xl p-8 mb-16">
+                <h2 class="text-4xl font-bold text-center mb-12">Why Choose IDLS?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-certificate text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Quality Guaranteed</h3>
+                        <p class="text-gray-600">Every product is tested and approved by our team of pet experts</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-shipping-fast text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Fast Shipping</h3>
+                        <p class="text-gray-600">Quick delivery to your doorstep with tracking</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-user-shield text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Secure Shopping</h3>
+                        <p class="text-gray-600">Safe and secure checkout process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dog Costumes Section -->
+        <div id="dog-costumes" class="content-section hidden">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-5xl font-bold text-center mb-8">Dog Costumes</h1>
+                <p class="text-xl text-gray-600 text-center mb-12">Fun costumes for every occasion and season.</p>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button onclick="filterCostumes('all')" class="filter-btn active bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">All Costumes</button>
+                    <button onclick="filterCostumes('animal')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Animal</button>
+                    <button onclick="filterCostumes('superhero')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Superhero</button>
+                    <button onclick="filterCostumes('halloween')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Halloween</button>
+                    <button onclick="filterCostumes('formal')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Formal Wear</button>
+                    <button onclick="filterCostumes('food')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Food</button>
+                    <button onclick="filterCostumes('movie')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Movie</button>
+                    <button onclick="filterCostumes('holiday')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Holiday</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Kuoser Dog Tuxedo Suit -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="formal">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Kuoser%20Dog%20Tuxedo%20Suit.jpg" alt="Kuoser Dog Tuxedo Suit" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 formal-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Formal
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Kuoser Dog Tuxedo Suit</h3>
+                            <p class="text-gray-600 mb-4">Formal black tuxedo costume for special occasions and events</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$25-40</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.6)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Kuoser+Dog+Tuxedo+Suit&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Onmygogo Lion Mane Wig -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="animal">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Onmygogo%20Lion%20Mane%20Wig.jpg" alt="Onmygogo Lion Mane Wig" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 animal-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Animal
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Onmygogo Lion Mane Wig</h3>
+                            <p class="text-gray-600 mb-4">Golden lion mane headpiece to transform your pup into the king of the jungle</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$15-25</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.2)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Onmygogo+Lion+Mane+Wig&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pet Deadly Doll Chucky Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="halloween">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Pet%20Deadly%20Doll%20Chucky%20Costume.jpg" alt="Pet Deadly Doll Chucky Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 halloween-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Horror
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Pet Deadly Doll Chucky Costume</h3>
+                            <p class="text-gray-600 mb-4">Horror movie character costume for Halloween spooky fun</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$20-35</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.1)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Pet+Deadly+Doll+Chucky+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rypet Dog Bat Wings -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="halloween">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Rypet%20Dog%20Bat%20Wings.jpg" alt="Rypet Dog Bat Wings" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 halloween-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Halloween
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Rypet Dog Bat Wings</h3>
+                            <p class="text-gray-600 mb-4">Black Halloween bat wings perfect for spooky season celebrations</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$12-20</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.5)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Rypet+Dog+Bat+Wings&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Gimilife Dog Hoodie Pajamas -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="casual">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Gimilife%20Dog%20Hoodie%20Pajamas.jpg" alt="Gimilife Dog Hoodie Pajamas" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 costume-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Comfort
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Gimilife Dog Hoodie Pajamas</h3>
+                            <p class="text-gray-600 mb-4">Cozy striped sleepwear for comfortable lounging and bedtime</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$15-25</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.4)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Gimilife+Dog+Hoodie+Pajamas&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rubie's Batman Pet Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="superhero">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Rubie's%20Batman%20Pet%20Costume.jpg" alt="Rubie's Batman Pet Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 superhero-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Superhero
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Rubie's Batman Pet Costume</h3>
+                            <p class="text-gray-600 mb-4">Superhero cape outfit to make your pup the hero of Gotham</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$18-30</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.3)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Rubie%27s+Batman+Pet+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- California Costumes Collections PET20151 Pirate Pup -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="themed">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/California%20Costumes%20Collections%20PET20151%20Pirate%20Pup.jpg" alt="California Costumes Collections PET20151 Pirate Pup" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 costume-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Themed
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">California Costumes Pirate Pup</h3>
+                            <p class="text-gray-600 mb-4">Pirate hat and bandana for swashbuckling adventures</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$20-35</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.6)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=California+Costumes+Collections+PET20151+Pirate+Pup&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Zelda Breath of the Wild Link -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="movie">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Zelda%20Breath%20of%20the%20Wild%20Link.jpg" alt="Zelda Breath of the Wild Link" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 movie-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Gaming
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Zelda Breath of the Wild Link</h3>
+                            <p class="text-gray-600 mb-4">Green tunic and hat inspired by the legendary hero of Hyrule</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$25-40</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.2)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Zelda+Breath+of+the+Wild+Link&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bootique Vampire Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="halloween">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Bootique%20Vampire%20Dog%20Costume.jpg" alt="Bootique Vampire Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 halloween-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Vampire
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Bootique Vampire Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Black cape with collar for a classic vampire look</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$15-25</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.4)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Bootique+Vampire+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Star Wars Ewok Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="movie">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Star%20Wars%20Ewok%20Dog%20Costume.jpg" alt="Star Wars Ewok Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 movie-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Star Wars
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Star Wars Ewok Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Brown furry hood to transform your pup into an adorable Ewok</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$25-40</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.7)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Star+Wars+Ewok+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Frisco Ghost Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="halloween">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Frisco%20Ghost%20Dog%20Costume.jpg" alt="Frisco Ghost Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 halloween-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Ghost
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Frisco Ghost Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">White sheet spooky outfit for classic Halloween haunting</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$15-25</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.3)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Frisco+Ghost+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pet Krewe Mardi Gras King -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="holiday">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Pet%20Krewe%20Mardi%20Gras%20King.jpg" alt="Pet Krewe Mardi Gras King" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 holiday-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Mardi Gras
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Pet Krewe Mardi Gras King</h3>
+                            <p class="text-gray-600 mb-4">Purple and gold crown for festive carnival celebrations</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$20-35</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.5)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Pet+Krewe+Mardi+Gras+King&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Casual Canine Bumble Bee -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="animal">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Casual%20Canine%20Bumble%20Bee.jpg" alt="Casual Canine Bumble Bee" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 animal-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Bee
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Casual Canine Bumble Bee</h3>
+                            <p class="text-gray-600 mb-4">Yellow black stripes with wings for buzzing around</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$15-25</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.6)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Casual+Canine+Bumble+Bee&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Thrills and Chills Shark -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="animal">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Thrills%20and%20Chills%20Shark.jpg" alt="Thrills and Chills Shark" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 animal-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Shark
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Thrills and Chills Shark</h3>
+                            <p class="text-gray-600 mb-4">Gray fin attack costume for ocean predator fun</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$20-35</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.2)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Thrills+and+Chills+Shark&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hip Doggie Taco Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="food">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Hip%20Doggie%20Taco%20Dog%20Costume.jpg" alt="Hip Doggie Taco Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 food-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Taco
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Hip Doggie Taco Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Mexican food funny outfit for festive dining occasions</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$18-30</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.7)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Hip+Doggie+Taco+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rubie's Superman Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="superhero">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Rubie's%20Superman%20Dog%20Costume.jpg" alt="Rubie's Superman Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 superhero-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Superman
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Rubie's Superman Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Blue and red superhero outfit for the man of steel</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$18-30</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.3)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Rubie%27s+Superman+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pet Krewe Hot Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="food">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-REPOSITORY/main/Dog%20Costumes/Pet%20Krewe%20Hot%20Dog%20Costume.jpg" alt="Pet Krewe Hot Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 food-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Hot Dog
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Pet Krewe Hot Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Realistic frankfurter look for food-themed fun</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$15-25</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.5)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Pet+Krewe+Hot+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- FurHaven Dinosaur Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="animal">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/FurHaven%20Dinosaur%20Dog%20Costume.jpg" alt="FurHaven Dinosaur Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 animal-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Dinosaur
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">FurHaven Dinosaur Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Spikes prehistoric outfit for jurassic adventures</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$20-35</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.6)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=FurHaven+Dinosaur+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bootique Lobster Dog Costume -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="animal">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/Bootique%20Lobster%20Dog%20Costume.jpg" alt="Bootique Lobster Dog Costume" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 animal-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Lobster
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Bootique Lobster Dog Costume</h3>
+                            <p class="text-gray-600 mb-4">Red shell with claws for crustacean costume fun</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$18-30</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.2)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=Bootique+Lobster+Dog+Costume&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- California Costumes Grim Reaper -->
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="halloween">
+                        <div class="relative">
+                            <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Costumes/California%20Costumes%20Grim%20Reaper.jpg" alt="California Costumes Grim Reaper" class="w-full h-64 object-cover">
+                            <div class="absolute top-4 left-4 halloween-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Grim Reaper
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">California Costumes Grim Reaper</h3>
+                            <p class="text-gray-600 mb-4">Black hood skeleton costume for ultimate spooky effect</p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-green-600">$20-35</span>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">(4.1)</span>
+                                </div>
+                            </div>
+                            <button onclick="window.open('https://www.amazon.com/s?k=California+Costumes+Grim+Reaper&tag=idls-20', '_blank')" class="w-full amazon-btn text-white py-3 rounded-xl font-bold text-lg">
+                                <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('active');
+        }
+
+        function closeDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.remove('active');
+        }
+
+        function filterCostumes(category) {
+            const cards = document.querySelectorAll('#dog-costumes .product-card');
+            const buttons = document.querySelectorAll('#dog-costumes .filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active', 'bg-blue-600', 'text-white'));
+            buttons.forEach(btn => btn.classList.add('bg-gray-200', 'text-gray-700'));
+
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('active', 'bg-blue-600', 'text-white');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

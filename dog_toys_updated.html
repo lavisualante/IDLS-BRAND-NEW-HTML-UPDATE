@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Toys | IDLS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}.product-card{transition:transform .3s ease,box-shadow .3s ease}.product-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.1)}.pulse-animation{animation:pulse 2s infinite}@keyframes pulse{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}.scarcity-badge{background:linear-gradient(45deg,#ff6b6b,#ee5a24);animation:glow 2s ease-in-out infinite alternate}@keyframes glow{from{box-shadow:0 0 5px #ff6b6b}to{box-shadow:0 0 20px #ff6b6b,0 0 30px #ff6b6b}}.amazon-btn{background:linear-gradient(45deg,#ff9500,#ff7300);transition:all .3s ease}.amazon-btn:hover{background:linear-gradient(45deg,#ff7300,#ff5500);transform:scale(1.05)}.filter-btn{transition:all .3s ease}.filter-btn.active{background:linear-gradient(45deg,#667eea,#764ba2)}.mobile-menu{transform:translateX(-100%);transition:transform .3s ease}.mobile-menu.active{transform:translateX(0)}
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-paw text-3xl text-blue-600 mr-3"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">International Dog Lovers Society</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="../IDLS_site_updated - Make changes here.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="../Dog Costumes/dog_costumes.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Dog Costumes</a>
+                    <a href="../Dog Dental/dog_dental.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Dog Dental</a>
+                    <a href="../Dog Grooming/dog_grooming.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Dog Grooming</a>
+                    <a href="../Dog Health/dog_health.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Dog Health</a>
+                    <a href="#dog-toys" class="text-blue-600 font-medium">Dog Toys</a>
+                </nav>
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-50 md:hidden">
+            <div class="p-4">
+                <button onclick="toggleMobileMenu()" class="mb-4">
+                    <i class="fas fa-times text-2xl text-gray-700"></i>
+                </button>
+                <div class="space-y-4">
+                    <a href="../IDLS_site_updated - Make changes here.html" class="block text-gray-700 font-medium py-2" onclick="toggleMobileMenu()">Home</a>
+                    <a href="../Dog Costumes/dog_costumes.html" class="block text-gray-700 font-medium py-2" onclick="toggleMobileMenu()">Dog Costumes</a>
+                    <a href="../Dog Dental/dog_dental.html" class="block text-gray-700 font-medium py-2" onclick="toggleMobileMenu()">Dog Dental</a>
+                    <a href="../Dog Grooming/dog_grooming.html" class="block text-gray-700 font-medium py-2" onclick="toggleMobileMenu()">Dog Grooming</a>
+                    <a href="../Dog Health/dog_health.html" class="block text-gray-700 font-medium py-2" onclick="toggleMobileMenu()">Dog Health</a>
+                    <a href="#dog-toys" class="block text-blue-600 font-medium py-2">Dog Toys</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8" id="dog-toys">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-6 text-gray-800">Dog Toys</h1>
+            <p class="text-xl text-gray-600 mb-8">Fun and engaging toys to keep your dog happy and active!</p>
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button onclick="filterProducts('all')" class="filter-btn active bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">All Products</button>
+                <button onclick="filterProducts('chew-toys')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Chew Toys</button>
+                <button onclick="filterProducts('interactive')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Interactive Toys</button>
+                <button onclick="filterProducts('fetch-toys')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Fetch Toys</button>
+                <button onclick="filterProducts('plush-toys')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Plush Toys</button>
+                <button onclick="filterProducts('puzzle-toys')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Puzzle Toys</button>
+                <button onclick="filterProducts('rope-toys')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Rope Toys</button>
+                <button onclick="filterProducts('comfort-toys')" class="filter-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Comfort Toys</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Benebone Wishbone -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="chew-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/benebone_wishbone.jpg" alt="Benebone Wishbone Durable Dog Chew Toy" class="w-full h-64 object-cover">
+                    <span class="scarcity-badge absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold">Popular</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Benebone Wishbone Durable Dog Chew Toy</h3>
+                    <p class="text-gray-600 mb-4">Durable wishbone-shaped chew toy made with real bacon flavor for dogs who love to chew</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.5/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$12-$15</span>
+                        <a href="https://www.amazon.com/s?k=Benebone+Wishbone+Durable+Dog+Chew+Toy+%28Real+Bacon+Flavor%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nylabone Power Chew -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="chew-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/nylabone_power_chew.jpg" alt="Nylabone Original Power Chew Classic Bone" class="w-full h-64 object-cover">
+                    <span class="scarcity-badge absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold">Popular</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Nylabone Original Power Chew Classic Bone</h3>
+                    <p class="text-gray-600 mb-4">Classic bone-shaped power chew toy with peanut butter flavor for aggressive chewers</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.5/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$8-$10</span>
+                        <a href="https://www.amazon.com/s?k=Nylabone+Original+Power+Chew+Classic+Bone+%28Peanut+Butter+Flavor%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nylabone Textured Ring -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="chew-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/nylabone_textured_ring.jpg" alt="Nylabone Power Chew Textured Ring" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Nylabone Power Chew Textured Ring</h3>
+                    <p class="text-gray-600 mb-4">Textured ring chew toy with multiple flavors designed for power chewing dogs</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.6/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$10-$15</span>
+                        <a href="https://www.amazon.com/s?k=Nylabone+Power+Chew+Textured+Ring+%28Flavor+Medley%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KONG Classic -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="interactive">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/kong_classic.jpg" alt="KONG Classic Stuffable Dog Toy" class="w-full h-64 object-cover">
+                    <span class="scarcity-badge absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold">Popular</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">KONG Classic Stuffable Dog Toy</h3>
+                    <p class="text-gray-600 mb-4">Classic natural rubber toy that can be stuffed with treats for interactive play</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.7/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$10-$13</span>
+                        <a href="https://www.amazon.com/s?k=KONG+Classic+Stuffable+Dog+Toy+%28Natural+Rubber%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KONG Extreme -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="chew-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/kong_extreme.jpg" alt="KONG Extreme Dog Toy" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">KONG Extreme Dog Toy</h3>
+                    <p class="text-gray-600 mb-4">Heavy-duty black rubber toy designed specifically for power chewing dogs</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.6/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$12-$15</span>
+                        <a href="https://www.amazon.com/s?k=KONG+Extreme+Dog+Toy+%28Black%2C+for+Power+Chewers%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chuckit Ultra Ball -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="fetch-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/chuckit_ultra_ball.jpg" alt="Chuckit Ultra Ball" class="w-full h-64 object-cover">
+                    <span class="scarcity-badge absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold">Popular</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Chuckit Ultra Ball</h3>
+                    <p class="text-gray-600 mb-4">High-bounce rubber ball designed for interactive fetch games and outdoor play</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.8/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$5-$9</span>
+                        <a href="https://www.amazon.com/s?k=Chuckit%21+Ultra+Ball+%28High-Bounce+Fetch+Ball%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wobble Wag Giggle Ball -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="interactive">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/wobble_wag_giggle.jpg" alt="Wobble Wag Giggle Ball" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Wobble Wag Giggle Ball</h3>
+                    <p class="text-gray-600 mb-4">Interactive ball that makes giggling sounds when played with, no batteries required</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.4/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$12-$15</span>
+                        <a href="https://www.amazon.com/s?k=Wobble+Wag+Giggle+Ball+%28Interactive+Noisy+Fetch+Ball%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mammoth Rope Tug -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="rope-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/mammoth_rope_tug.jpg" alt="Mammoth Flossy Chews Cottonblend Rope Tug" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Mammoth Flossy Chews Cottonblend Rope Tug</h3>
+                    <p class="text-gray-600 mb-4">Cotton blend rope toy with 3 knots, perfect for tugging and dental health</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.4/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$8-$15</span>
+                        <a href="https://www.amazon.com/s?k=Mammoth+Flossy+Chews+Cottonblend+Rope+Tug+%283-Knot%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multipet Lamb Chop -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="plush-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/multipet_lamb_chop.jpg" alt="Multipet Lamb Chop Plush Squeaky Dog Toy" class="w-full h-64 object-cover">
+                    <span class="scarcity-badge absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold">Popular</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Multipet Lamb Chop Plush Squeaky Dog Toy</h3>
+                    <p class="text-gray-600 mb-4">Classic plush Lamb Chop character toy with squeaker for comfort and play</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.7/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$5-$10</span>
+                        <a href="https://www.amazon.com/s?k=Multipet+%22Lamb+Chop%22+Plush+Squeaky+Dog+Toy&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Pet Supplies Stuffless -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="plush-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/best_pet_stuffless.jpg" alt="Best Pet Supplies 2-in-1 Stuffless Squeaky Toys" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Best Pet Supplies 2-in-1 Stuffless Squeaky Toys</h3>
+                    <p class="text-gray-600 mb-4">Stuffing-free plush toys with squeakers, available in raccoon and fox designs</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.6/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$10-$15</span>
+                        <a href="https://www.amazon.com/s?k=Best+Pet+Supplies+2-in-1+Stuffless+Squeaky+Toys+%28Plush+Raccoon%2FFox%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jalousie 5-Pack -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="plush-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/jalousie_5pack.jpg" alt="Jalousie 5-Pack Plush Dog Toys" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Jalousie 5-Pack Plush Dog Toys</h3>
+                    <p class="text-gray-600 mb-4">Set of 5 assorted plush squeaky toys in various animal designs for small to medium dogs</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.5/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$20-$23</span>
+                        <a href="https://www.amazon.com/s?k=Jalousie+5-Pack+Plush+Dog+Toys+%28Assorted+Squeaky+Toys%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outward Hound Brick Puzzle -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="puzzle-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/outward_hound_brick.jpg" alt="Outward Hound Nina Ottosson Dog Brick Puzzle Toy" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Outward Hound Nina Ottosson Dog Brick Puzzle Toy</h3>
+                    <p class="text-gray-600 mb-4">Level 2 difficulty puzzle toy that challenges dogs to find hidden treats using sliding compartments</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.4/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$15-$25</span>
+                        <a href="https://www.amazon.com/s?k=Outward+Hound+Nina+Ottosson+Dog+Brick+Puzzle+Toy+%28Interactive+Treat+Puzzle%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outward Hound Squirrel -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="puzzle-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/outward_hound_squirrel.jpg" alt="Outward Hound Hide-A-Squirrel Puzzle Plush" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Outward Hound Hide-A-Squirrel Puzzle Plush</h3>
+                    <p class="text-gray-600 mb-4">Interactive plush tree trunk toy with removable squeaky squirrels for hide and seek play</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.6/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$15-$25</span>
+                        <a href="https://www.amazon.com/s?k=Outward+Hound+Hide-A-Squirrel+Puzzle+Plush+%28Hide+and+Seek+Toy%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Petstages Dogwood -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="chew-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/petstages_dogwood.jpg" alt="Petstages Dogwood Chew Stick" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Petstages Dogwood Chew Stick</h3>
+                    <p class="text-gray-600 mb-4">Safe wood alternative chew stick that satisfies dogs' natural urge to chew on wood</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.6/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$6-$15</span>
+                        <a href="https://www.amazon.com/s?k=Petstages+Dogwood+Chew+Stick+%28Wood+Alternative+Chew+Toy%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SmartPetLove Snuggle Puppy -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="comfort-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/smartpetlove_snuggle.jpg" alt="SmartPetLove Snuggle Puppy Behavioral Aid Toy" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">SmartPetLove Snuggle Puppy Behavioral Aid Toy</h3>
+                    <p class="text-gray-600 mb-4">Behavioral aid toy with real-feel heartbeat and heat pack to comfort anxious dogs and puppies</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="text-gray-600 ml-2">4.4/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">~$39</span>
+                        <a href="https://www.amazon.com/s?k=SmartPetLove+Snuggle+Puppy+Behavioral+Aid+Toy+%28Comfort+Plush%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chuckit Paraflight -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="fetch-toys">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/lavisualante/IDLS-NEW-REPOSITORY/main/Dog%20Toys/chuckit_paraflight.jpg" alt="Chuckit Paraflight Flyer" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Chuckit Paraflight Flyer</h3>
+                    <p class="text-gray-600 mb-4">Soft flying disc with multilayer construction for safe and fun fetch games</p>
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="text-gray-600 ml-2">4.6/5 stars</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-green-600">$10-$13</span>
+                        <a href="https://www.amazon.com/s?k=Chuckit%21+Paraflight+Flyer+%28Flying+Disc+Toy%29&tag=idls-20" target="_blank" class="amazon-btn text-white px-6 py-2 rounded-full font-semibold">
+                            <i class="fab fa-amazon mr-2"></i>Buy on Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About IDLS</h3>
+                    <p class="text-gray-300">International Dog Lovers Society is dedicated to providing the best products and care information for your beloved pets.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../IDLS_site_updated - Make changes here.html" class="text-gray-300 hover:text-white transition">Home</a></li>
+                        <li><a href="../Dog Costumes/dog_costumes.html" class="text-gray-300 hover:text-white transition">Dog Costumes</a></li>
+                        <li><a href="../Dog Dental/dog_dental.html" class="text-gray-300 hover:text-white transition">Dog Dental</a></li>
+                        <li><a href="../Dog Grooming/dog_grooming.html" class="text-gray-300 hover:text-white transition">Dog Grooming</a></li>
+                        <li><a href="../Dog Health/dog_health.html" class="text-gray-300 hover:text-white transition">Dog Health</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+                    <p class="text-gray-300">Email: info@idls.com</p>
+                    <p class="text-gray-300">Phone: (555) 123-4567</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 International Dog Lovers Society. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+
+            event.target.classList.add('active', 'bg-blue-600', 'text-white');
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
